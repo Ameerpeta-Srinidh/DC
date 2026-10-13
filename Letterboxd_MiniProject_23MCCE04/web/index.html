@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14181c">
+  <title>Frame by Frame — Film Diary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Frame by Frame home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>frame<span class="brand-light">byframe</span></span>
+      </a>
+      <div class="sidebar-caption">YOUR FILM LIFE</div>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-item active" data-view="discover"><span class="nav-icon">◈</span> Discover</button>
+        <button class="nav-item" data-view="diary"><span class="nav-icon">▤</span> My diary</button>
+        <button class="nav-item" data-view="feed"><span class="nav-icon">◉</span> Activity</button>
+        <button class="nav-item" data-view="people"><span class="nav-icon">♧</span> People</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile-card hidden" id="profile-card">
+          <div class="avatar" id="profile-avatar">F</div>
+          <div class="profile-copy"><strong id="profile-name">Guest</strong><span>Film enthusiast</span></div>
+          <button class="icon-button" id="logout-button" title="Log out" aria-label="Log out">↗</button>
+        </div>
+        <button class="auth-open" id="open-auth">Sign in <span>→</span></button>
+        <div class="sidebar-note">A small place for<br>your big-screen memories.</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>FILM JOURNAL</span><i>/</i><strong id="topbar-title">Discover</strong></div>
+        <div class="topbar-actions">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Find a film..." autocomplete="off"><kbd>/</kbd></label>
+          <button class="button button-primary button-small" id="quick-log" disabled>＋ <span>Log a film</span></button>
+        </div>
+      </header>
+
+      <section class="view active" id="discover-view">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="live-dot"></span> YOUR PERSONAL FILM JOURNAL</div>
+            <h1>Every film leaves<br><em>a little something.</em></h1>
+            <p>Keep track of what you watch, what you love, and what stays with you long after the credits.</p>
+            <button class="button button-light" id="hero-log" disabled>＋ Log your first film</button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="film-poster poster-main"><div class="poster-shape"></div><span class="poster-index">01 / 03</span><div class="poster-title">A<br>STORY<br>IN LIGHT</div><div class="poster-meta">THE CINEMA COLLECTION</div></div>
+            <div class="film-poster poster-back poster-back-one"></div><div class="film-poster poster-back poster-back-two"></div>
+            <div class="hero-stamp">THE<br>PICTURE<br>HOUSE <span>✳</span></div>
+          </div>
+          <div class="hero-foot"><span>GOOD FILMS. GOOD COMPANY.</span><span>EST. 2025 &nbsp;·&nbsp; BUILT FOR THE LOVE OF FILM</span></div>
+        </div>
+
+        <div class="section-heading">
+          <div><div class="eyebrow">PICK YOUR NEXT WATCH</div><h2>Explore the collection</h2></div>
+          <div class="collection-count" id="film-count">Loading films <span>↗</span></div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-pills">
+            <button class="filter-pill selected" data-filter="All">All films</button>
+            <button class="filter-pill" data-filter="Drama">Drama</button>
+            <button class="filter-pill" data-filter="Sci-Fi">Sci-fi</button>
+            <button class="filter-pill" data-filter="Thriller">Thriller</button>
+            <button class="filter-pill" data-filter="Animation">Animation</button>
+          </div>
+          <span class="subtle-label">A CURATED STARTING POINT</span>
+        </div>
+        <div class="film-grid" id="film-grid"></div>
+        <div class="empty-state hidden" id="film-empty"><strong>No films found</strong><span>Try a different title or genre.</span></div>
+      </section>
+
+      <section class="view" id="diary-view">
+        <div class="page-intro"><div class="eyebrow">YOUR WATCH HISTORY</div><h1>My diary</h1><p>A little record of everywhere your attention has wandered.</p></div>
+        <div class="stats-row"><div class="stat-card"><span>FILMS LOGGED</span><strong id="diary-total">0</strong></div><div class="stat-card"><span>THIS YEAR</span><strong id="diary-year">0</strong></div><div class="stat-card"><span>AVERAGE RATING</span><strong id="diary-average">—</strong></div></div>
+        <div class="diary-list" id="diary-list"></div>
+      </section>
+
+      <section class="view" id="feed-view">
+        <div class="page-intro"><div class="eyebrow">FROM YOUR FILM CIRCLE</div><h1>The conversation</h1><p>Recent watches from people you follow.</p></div>
+        <div class="feed-list" id="feed-list"></div>
+      </section>
+
+      <section class="view" id="people-view">
+        <div class="page-intro"><div class="eyebrow">WATCH TOGETHER, APART</div><h1>People &amp; diaries</h1><p>Follow a friend or peek at a public film diary.</p></div>
+        <div class="people-panel">
+          <div class="panel-heading"><div><h2>Find a film friend</h2><p>Use their exact username to follow their activity.</p></div><span class="panel-icon">♧</span></div>
+          <div class="people-form"><input id="person-input" type="text" placeholder="e.g. cinephile42" maxlength="40"><button class="button button-primary" id="follow-button" disabled>＋ Follow</button><button class="button button-outline" id="unfollow-button" disabled>Unfollow</button></div>
+          <p class="form-hint" id="people-message">Sign in to follow accounts. Public diaries can be viewed below.</p>
+        </div>
+        <div class="people-panel public-diary-panel">
+          <div class="panel-heading"><div><h2>Visit a public diary</h2><p>Enter a username to see their logged films.</p></div><span class="panel-icon">↗</span></div>
+          <div class="people-form"><input id="public-user-input" type="text" placeholder="Username to visit" maxlength="40"><button class="button button-dark" id="public-diary-button">View diary <span>→</span></button></div>
+          <div class="diary-list" id="public-diary-list"></div>
+        </div>
+      </section>
+
+      <footer class="page-footer"><span>FRAME BY FRAME <span class="footer-dot">✳</span> A SOCKET PROGRAMMING MINI PROJECT</span><span>MADE FOR THE LOVE OF FILM &nbsp;·&nbsp; 2025</span></footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="modal" id="auth-modal">
+    <div class="modal-top"><div class="modal-brand">frame<span>byframe</span></div><button class="icon-button modal-close" data-close="auth-modal" aria-label="Close">×</button></div>
+    <div class="eyebrow">WELCOME TO YOUR FILM JOURNAL</div><h2 id="auth-title">Your next chapter<br>starts here.</h2><p class="modal-description" id="auth-description">Sign in to keep a personal record of the films you watch.</p>
+    <form id="auth-form">
+      <label>Username<input id="auth-username" name="username" autocomplete="username" required minlength="3" maxlength="40" placeholder="Choose a username"></label>
+      <label>Password<input id="auth-password" name="password" type="password" autocomplete="current-password" required minlength="1" placeholder="Your password"></label>
+      <button class="button button-dark modal-submit" type="submit" id="auth-submit">Sign in <span>→</span></button>
+    </form>
+    <button class="text-button" id="auth-switch">New here? Create an account</button>
+  </dialog>
+
+  <dialog class="modal log-modal" id="log-modal">
+    <div class="modal-top"><div class="modal-brand">LOG A FILM <span>✳</span></div><button class="icon-button modal-close" data-close="log-modal" aria-label="Close">×</button></div>
+    <div class="eyebrow">ADD TO YOUR DIARY</div><h2>Make it a memory.</h2>
+    <form id="log-form">
+      <label>Choose a film<select id="log-film" required></select></label>
+      <div class="form-split"><label>Your rating<select id="log-rating"><option value="5">5 stars</option><option value="4.5">4½ stars</option><option value="4">4 stars</option><option value="3.5">3½ stars</option><option value="3">3 stars</option><option value="2.5">2½ stars</option><option value="2">2 stars</option><option value="1.5">1½ stars</option><option value="1">1 star</option></select></label><label>Date watched<input id="log-date" type="date" required></label></div>
+      <label>A few words <span class="optional">(optional)</span><textarea id="log-review" rows="3" maxlength="500" placeholder="What stayed with you?"></textarea></label>
+      <button class="button button-dark modal-submit" type="submit">Save to diary <span>→</span></button>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>

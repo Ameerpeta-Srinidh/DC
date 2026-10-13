@@ -1,0 +1,10 @@
+*.class
+*.ser
+*.bin
+*.zip
+*.exe
+out/
+__pycache__/
+*.py[cod]
+.env*
+!.env.example
